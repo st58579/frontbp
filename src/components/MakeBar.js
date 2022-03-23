@@ -21,7 +21,10 @@ const MakeBar = observer(() => {
                 <ListGroup.Item
                     key={make.idMake}
                     className="p-3"
-                    onClick={() => autoStore.setSelectedMake(make)}
+                    onClick={() => {
+                        autoStore.setSelectedMake(make)
+                        autoStore.setPage(1)
+                    }}
                     active={make.idMake === autoStore.selectedMake.idMake}
                     style={{cursor: "pointer"}}
                 >

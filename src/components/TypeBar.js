@@ -22,7 +22,10 @@ const TypeBar = observer(() => {
                 <ListGroup.Item
                     key={type.idType}
                     active={type.idType === autoStore.selectedType.idType}
-                    onClick={() => autoStore.setSelectedType(type)}
+                    onClick={() => {
+                        autoStore.setPage(1)
+                        autoStore.setSelectedType(type)
+                    }}
                     style={{cursor: "pointer"}}
                 >
                     {type.type}
