@@ -6,10 +6,10 @@ import {useContext, useEffect, useState} from "react";
 import {Context} from "./index";
 import {check} from "./api/UserApi";
 import {Spinner} from "react-bootstrap";
+import {CookiesProvider} from "react-cookie";
 
 const App = observer(() => {
-    const {user} = useContext(Context)
-    const [loading, setLoading] = useState(true)
+
 
     // useEffect(() => {
     //     check().then(data => {
@@ -24,8 +24,10 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-            <NavBar/>
-            <ApplicationRouter/>
+            <CookiesProvider>
+                <NavBar/>
+                <ApplicationRouter/>
+            </CookiesProvider>
         </BrowserRouter>
     );
 });

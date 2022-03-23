@@ -17,20 +17,24 @@ const Auth = observer(() => {
 
     const authenticate = async () =>{
         try {
-            let data;
+            let userDto;
             if (isLogin) {
-                data = await login(username, password)
+                userDto = await login(username, password)
             } else {
-                data = await registration(username, password)
+                userDto = await registration(username, password)
             }
-            user.setUser(data)
-            console.log(data)
-            user.setUsername(localStorage.getItem("username"))
+            user.setId(userDto.id)
+            user.setUsername(userDto.username)
             user.setIsAuth(true)
+            user.setRole(userDto.role)
             navigate(CARSHARING_ROUTE)
         } catch (e){
             alert(e.response.data.message)
         }
+    }
+
+    if(user.isAuth){
+        navigate(CARSHARING_ROUTE)
     }
 
     return (

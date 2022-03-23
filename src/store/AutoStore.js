@@ -4,21 +4,37 @@ export default class AutoStore {
     constructor() {
         this._makes = []
         this._types = []
-        this._cars = [
-            {
-                idCar: 1,
-                model: 'X5',
-                year: '2020',
-                seatsNumber: 7,
-                pricePerDay: '1000',
-                make: 'BMW',
-                type: 'Hatchback',
-                img: 'http://holder.ninja/400x300.svg'
-            }
-        ]
-        this._selectedType = {}
-        this._selectedMake = {}
+        this._cars = []
+        this._selectedType = {idType: 0, type: "All types"}
+        this._selectedMake = {idMake: 0, make: "All makes"}
+        this._page = 1
+        this._totalCount = 0
+        this._limit = 8
         makeAutoObservable(this)
+    }
+
+    setLimit(limit){
+        this._limit = limit
+    }
+
+    get limit(){
+        return this._limit
+    }
+
+    setTotalCount(totalCount){
+        this._totalCount = totalCount
+    }
+
+    get totalCount(){
+        return this._totalCount
+    }
+
+    setPage(page){
+        this._page = page
+    }
+
+    get page(){
+        return this._page
     }
 
     setMakes(makes) {

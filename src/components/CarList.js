@@ -4,10 +4,10 @@ import {Row} from "react-bootstrap";
 import CarListItem from "./CarListItem";
 
 const CarList = () => {
-    const {cars} = useContext(Context)
+    const {autoStore} = useContext(Context)
     return (
         <Row className="d-flex">
-            {cars.cars.map(car =>
+            {autoStore.cars.map(car =>
                 <CarListItem key={car.idCar} car={car}/>
             )}
         </Row>

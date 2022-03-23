@@ -10,9 +10,9 @@ const NavBar = observer(() => {
     const navigate = useNavigate()
 
     const logOut = () => {
-        user.setUser({})
         user.setIsAuth(false)
         user.setUsername({})
+        user.setRole({})
         navigate(LOGIN_ROUTE)
     }
 
@@ -23,7 +23,7 @@ const NavBar = observer(() => {
                 {user.isAuth ?
                     <Nav className="ml-auto" style={{color: 'white'}}>
                         <h3 >User: {user.username}</h3>
-                        {user.user.roles === 'admin' ?
+                        {user.role === 'admin' ?
                         <Button variant={"outline-light"} className="ms-3" onClick={() => navigate(ADMIN_ROUTE)}>Admin</Button>
                         : null}
                         <Button variant={"primary"}  className="ms-2"  onClick={logOut}>Sign out</Button>

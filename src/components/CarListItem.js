@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Col, Image} from "react-bootstrap";
 import {useNavigate} from "react-router-dom"
 import {AUTO_ROUTE} from "../utils/consts";
+import defaultPlaceholder from "../400x300.png"
 
 const CarListItem = ({car}) => {
     const navigate = useNavigate()
@@ -9,11 +10,11 @@ const CarListItem = ({car}) => {
     return (
         <Col md={3} onClick={() => navigate(AUTO_ROUTE + '/' + car.idCar)}>
             <Card style={{width: 202, cursor: "pointer", marginTop: "10px", alignItems: "center"}} border={"primary"}>
-                <Image width={200} height={200} src={car.img}/>
+                <Image width={200} height={200} src={car.img ? car.img : defaultPlaceholder}/>
                 <div className="align-items-center">
                     <div>Car ID: {car.idCar}</div>
                     <div>Model: {car.model}</div>
-                    <div>Make: {car.make}</div>
+                    <div>Make: {car.makeName}</div>
                     <div>Type: {car.type}</div>
                     <div>Price/day: {car.pricePerDay}</div>
                 </div>

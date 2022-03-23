@@ -14,18 +14,27 @@ export const addType = async (username, password) => {
     const {data} = await $host.post('api/auth/registration', {username, password, role: 'user'})
     return jwtDecode(data.token)
 }
-
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/carsharing/types')
     return data
 }
 
 export const fetchAllCars = async () => {
-    const {data} = await $host.get('api/carsharing/cars')
+    const {data} = await $host.get('api/carsharing/all')
     return data
 }
-
-export const check = async (token) => {
-    const {data} = await $authHost.post('api/auth/check', localStorage.getItem('token'))
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)}
+export const fetchAllCarsPaginated = async () => {
+    const {data} = await $host.get('api/carsharing')
+    return data
+}
+export const fetchAllCarsPaginatedAndFiltered = async (makeId, typeId, page, limit) => {
+    const {data} = await $host.post('api/carsharing/filter', {makeId: makeId, typeId: typeId, page: ((page - 1) * limit), limit: limit})
+    return data
+}
+export const fetchSingleCar = async (id) => {
+    const {data} = await $host.get('api/carsharing/' + id)
+    return data
+}
+export const addCar = async (auto) => {
+    await $authHost.post('api/carsharing/car/add', auto)
+}
