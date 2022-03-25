@@ -4,23 +4,18 @@ import NavBar from "./components/NavBar";
 import {observer} from "mobx-react-lite";
 import {useContext, useEffect, useState} from "react";
 import {Context} from "./index";
-import {check} from "./api/UserApi";
-import {Spinner} from "react-bootstrap";
 import {CookiesProvider} from "react-cookie";
 
 const App = observer(() => {
+    const {userStore} = useContext(Context)
 
+    useEffect(() => {
+        userStore.setIsAuth(localStorage.getItem('isAuth') === 'true')
+        userStore.setUsername(localStorage.getItem('username'))
+        userStore.setRole(localStorage.getItem('role'))
+        userStore.setId(localStorage.getItem('id'))
+    }, [])
 
-    // useEffect(() => {
-    //     check().then(data => {
-    //         user.setUser(user.username)
-    //         user.setIsAuth(true)
-    //     }).finally(() => setLoading(false))
-    // }, [])
-    //
-    // if(loading){
-    //     return <Spinner animation={"grow"}/>
-    // }
 
     return (
         <BrowserRouter>

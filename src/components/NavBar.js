@@ -1,18 +1,24 @@
 import React, {useContext} from 'react';
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {NavLink, useNavigate} from "react-router-dom";
-import {ADMIN_ROUTE, CARSHARING_ROUTE, LOGIN_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, CARSHARING_ROUTE, LOGIN_ROUTE, USER_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 
 const NavBar = observer(() => {
-    const {user} = useContext(Context)
+    const {userStore} = useContext(Context)
     const navigate = useNavigate()
 
     const logOut = () => {
-        user.setIsAuth(false)
-        user.setUsername({})
-        user.setRole({})
+        userStore.setIsAuth(false)
+        userStore.setUsername({})
+        userStore.setRole({})
+        userStore.setId({})
+        localStorage.removeItem('token')
+        localStorage.removeItem('isAuth')
+        localStorage.removeItem('username')
+        localStorage.removeItem('role')
+        localStorage.removeItem('id')
         navigate(LOGIN_ROUTE)
     }
 
@@ -20,17 +26,16 @@ const NavBar = observer(() => {
         <Navbar bg="dark" variant="dark">
             <Container>
                 <NavLink style={{color: 'white'}} to={CARSHARING_ROUTE}>Carsharing</NavLink>
-                {user.isAuth ?
+                {userStore.isAuth ?
                     <Nav className="ml-auto" style={{color: 'white'}}>
-                        <h3 >User: {user.username}</h3>
-                        {user.role === 'admin' ?
-                        <Button variant={"outline-light"} className="ms-3" onClick={() => navigate(ADMIN_ROUTE)}>Admin</Button>
+                        <Button variant={"dark"} className="ms-2" onClick={() => navigate(USER_ROUTE + "/" + userStore.username)}>username: {userStore.username}</Button>
+                        {userStore.role === 'admin' ?
+                        <Button variant={"outline-light"} className="ms-2" onClick={() => navigate(ADMIN_ROUTE)}>Admin</Button>
                         : null}
-                        <Button variant={"primary"}  className="ms-2"  onClick={logOut}>Sign out</Button>
+                        <Button variant={"outline-danger"}  className="ms-2"  onClick={logOut}>Sign out</Button>
                     </Nav>
                     :
                     <Nav className="ml-auto" style={{color: 'white'}}>
-                        <h3 >Guest</h3>
                         <Button variant={"primary"} className="ms-3" onClick={() => navigate(LOGIN_ROUTE)}>Login</Button>
                     </Nav>
                 }

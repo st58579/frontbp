@@ -7,7 +7,7 @@ import {login, registration} from "../api/UserApi";
 import {observer} from "mobx-react-lite";
 
 const Auth = observer(() => {
-    const {user} = useContext(Context)
+    const {userStore} = useContext(Context)
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -23,17 +23,17 @@ const Auth = observer(() => {
             } else {
                 userDto = await registration(username, password)
             }
-            user.setId(userDto.id)
-            user.setUsername(userDto.username)
-            user.setIsAuth(true)
-            user.setRole(userDto.role)
+            userStore.setId(userDto.id)
+            userStore.setUsername(userDto.username)
+            userStore.setIsAuth(true)
+            userStore.setRole(userDto.role)
             navigate(CARSHARING_ROUTE)
         } catch (e){
             alert(e.response.data.message)
         }
     }
 
-    if(user.isAuth){
+    if(userStore.isAuth){
         navigate(CARSHARING_ROUTE)
     }
 

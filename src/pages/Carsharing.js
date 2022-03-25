@@ -28,12 +28,10 @@ const Carsharing = observer(() => {
 
     useEffect(() => {
         setLoading(true)
-        console.log("fetching cars : ", autoStore.selectedMake.idMake, autoStore.selectedType.idType, autoStore.page, autoStore.limit)
         fetchAllCarsPaginatedAndFiltered(autoStore.selectedMake.idMake, autoStore.selectedType.idType, autoStore.page, autoStore.limit)
             .then(data => {
                 autoStore.setCars(data.cars)
                 autoStore.setTotalCount(data.count)
-
             })
 
             .finally(() => setLoading(false))
