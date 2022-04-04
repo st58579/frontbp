@@ -3,7 +3,7 @@ import {Button, Card, Container, Form} from "react-bootstrap";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {CARSHARING_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {Context} from "../index";
-import {login, registration} from "../api/UserApi";
+import {getBalance, getWallet, login, registration} from "../api/UserApi";
 import {observer} from "mobx-react-lite";
 
 const Auth = observer(() => {
@@ -23,6 +23,8 @@ const Auth = observer(() => {
             } else {
                 userDto = await registration(username, password)
             }
+            let userWallet = await getWallet(userDto.id)
+            userStore.setWallet(userWallet)
             userStore.setId(userDto.id)
             userStore.setUsername(userDto.username)
             userStore.setIsAuth(true)

@@ -1,18 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Image, ListGroup, Row, Spinner} from "react-bootstrap";
 import {useNavigate, useParams} from "react-router-dom";
 import {fetchSingleCar} from "../api/CarsharingApi";
 import defaultPlaceholder from '../400x300.png'
 import {CARSHARING_ROUTE} from "../utils/consts";
+import RentAuto from "../modals/RentAuto";
+import {Context} from "../index";
 
 const AutoPage = () => {
+    const {autoStore} = useContext(Context)
     const [selectedAuto, setSelectedAuto] = useState(null)
-    const {id} = useParams()
+    const [rentAutoVisible, setRentAutoVisible] = useState(false)
     const [loading, setLoading] = useState(true)
+    const {id} = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchSingleCar(id).then(data => setSelectedAuto(data)).finally(() => setLoading(false))
+        fetchSingleCar(id).then(data => {
+            setSelectedAuto(data)
+            autoStore.setSelectedAuto(data)
+        }).finally(() => setLoading(false))
     }, [])
 
     if (loading) {
@@ -83,8 +90,10 @@ const AutoPage = () => {
                     </Col>
                     <Col md={4}>
                         <Row>
-                            <Button variant={"outline-dark"} size={"lg"}>Rent this car</Button>
-                            <Button className={"mt-3"} variant={"outline-dark"} size={"lg"} onClick={() => navigate(CARSHARING_ROUTE)}>Back to catalog</Button>
+                            <Button variant={"outline-dark"} size={"lg"}
+                                    onClick={() => setRentAutoVisible(true)}>Rent this car</Button>
+                            <Button className={"mt-3"} variant={"outline-dark"} size={"lg"}
+                                    onClick={() => navigate(CARSHARING_ROUTE)}>Back to catalog</Button>
                         </Row>
                     </Col>
                 </Row>
@@ -106,6 +115,9 @@ const AutoPage = () => {
                     </Col>
                 </Row>
             </Card>
+
+            <RentAuto show={rentAutoVisible} onHide={() => setRentAutoVisible(false)} />
+
         </Container>
     );
 };

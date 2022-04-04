@@ -15,9 +15,9 @@ const CarListItem = ({car}) => {
                     <Card.Title >{car.makeName} {car.model}</Card.Title>
                     <Card.Subtitle>Price/day: {car.pricePerDay}</Card.Subtitle>
                     <ListGroup variant="">
-                        <text>Car ID: {car.idCar}</text>
-                        <text>Make: {car.makeName}</text>
-                        <text>Type: {car.type}</text>
+                        <div>Car ID: {car.idCar}</div>
+                        <div>Make: {car.makeName}</div>
+                        <div>Type: {car.type}</div>
                     </ListGroup>
                 </Card.Body>
 

@@ -14,7 +14,6 @@ const CreateAuto = observer(({show, onHide}) => {
     const [selectedType, setSelectedType] = useState(null)
     const [selectedMake, setSelectedMake] = useState(null)
     const [image, setImage] = useState()
-    const fileInputRef = createRef()
 
 
     const selectFile = e => {
@@ -38,34 +37,6 @@ const CreateAuto = observer(({show, onHide}) => {
             });
         };
         reader.readAsDataURL(image);
-
-
-        // reader.onload = () => {
-        //     const img = "data:image/jpeg;base64," + reader.result?.replace("data:", "")
-        //         .replace(/^.+,/, "");
-        //     const data = {model, year, seatsNumber, pricePerDay, idType, idMake, img, idUser}
-        //     addCar(data).then(data => onHide)
-        // }
-        // reader.readAsDataURL(fileInputRef.current.files[0]);
-        // const formData = new FormData()
-        // formData.append('model', model)
-        // formData.append('year', year)
-        // formData.append('seatsNumber', seatsNumber)
-        // formData.append('pricePerDay', pricePerDay)
-        // formData.append('idType', idType)
-        // formData.append('idMake', idMake)
-        // formData.append('img', img)
-        // formData.append('idUser', idUser)
-        // addCar(formData).then(data => onHide)
-        // const reader = new FileReader()
-        // reader.onload = () => {
-        //     const base64String = "data:image/jpeg;base64," + reader.result?.replace("data:", "")
-        //         .replace(/^.+,/, "");
-        //     console.log(data)
-        //     console.log(img)
-        // }
-        // reader.readAsDataURL(img);
-
     }
 
     return (
@@ -122,7 +93,7 @@ const CreateAuto = observer(({show, onHide}) => {
                     <Form.Control value={pricePerDay} onChange={e => setPricePerDay(Number(e.target.value))}
                                   className="mt-3" type="number" placeholder="Price per day"/>
                     <Form.Control onChange={selectFile}
-                                  className="mt-3" type="file" placeholder="Image"/>
+                                  className="mt-3" type="file" placeholder="Image" accept="image/png, image/jpeg"/>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

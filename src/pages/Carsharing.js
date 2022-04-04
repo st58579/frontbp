@@ -15,20 +15,21 @@ import Pages from "../components/Pages";
 
 const Carsharing = observer(() => {
     const {autoStore} = useContext(Context)
+    const {userStore} = useContext(Context)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchMakes().then(data => autoStore.setMakes(data))
         fetchTypes().then(data => autoStore.setTypes(data))
         fetchAllCarsPaginated().then(data => {
-                autoStore.setCars(data.cars)
-                autoStore.setTotalCount(data.count)
-            })
+            autoStore.setCars(data.cars)
+            autoStore.setTotalCount(data.count)
+        })
     }, [])
 
     useEffect(() => {
         setLoading(true)
-        fetchAllCarsPaginatedAndFiltered(autoStore.selectedMake.idMake, autoStore.selectedType.idType, autoStore.page, autoStore.limit)
+        fetchAllCarsPaginatedAndFiltered(autoStore.selectedMake.idMake, autoStore.selectedType.idType, autoStore.page, autoStore.limit, userStore.id)
             .then(data => {
                 autoStore.setCars(data.cars)
                 autoStore.setTotalCount(data.count)
@@ -37,7 +38,7 @@ const Carsharing = observer(() => {
             .finally(() => setLoading(false))
     }, [autoStore.selectedMake, autoStore.selectedType, autoStore.page])
 
-    if(loading){
+    if (loading) {
         return <Spinner animation={"grow"}/>
     }
 

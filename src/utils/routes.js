@@ -1,9 +1,19 @@
 import Admin from "../pages/Admin";
-import {ADMIN_ROUTE, AUTO_ROUTE, CARSHARING_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, USER_ROUTE} from "./consts";
+import {
+    ADMIN_ROUTE,
+    AUTO_ROUTE,
+    CARSHARING_ROUTE,
+    LOGIN_ROUTE,
+    REGISTRATION_ROUTE,
+    USER_CARS_ROUTE, USER_RENTED_CARS_ROUTE,
+    USER_ROUTE
+} from "./consts";
 import Carsharing from "../pages/Carsharing";
 import Auth from "../pages/Auth";
 import AutoPage from "../pages/AutoPage";
 import UserPage from "../pages/UserPage";
+import UserCarsPage from "../pages/UserCarsPage";
+import UserRentedCarsPage from "../pages/UserRentedCarsPage";
 
 export const authRoutes = [
     {
@@ -17,6 +27,14 @@ export const authRoutes = [
     {
         path: USER_ROUTE + '/:username',
         Component : UserPage
+    },
+    {
+        path: USER_CARS_ROUTE,
+        Component : UserCarsPage
+    },
+    {
+        path: USER_RENTED_CARS_ROUTE,
+        Component : UserRentedCarsPage
     }
 ]
 export const adminRoutes = [

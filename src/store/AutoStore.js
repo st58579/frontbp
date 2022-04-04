@@ -10,7 +10,16 @@ export default class AutoStore {
         this._page = 1
         this._totalCount = 0
         this._limit = 8
+        this._selectedAuto = {}
         makeAutoObservable(this)
+    }
+
+    setSelectedAuto(selectedAuto){
+        this._selectedAuto = selectedAuto
+    }
+
+    get selectedAuto(){
+        return this._selectedAuto
     }
 
     setLimit(limit){

@@ -27,14 +27,32 @@ export const fetchAllCarsPaginated = async () => {
     const {data} = await $host.get('api/carsharing')
     return data
 }
-export const fetchAllCarsPaginatedAndFiltered = async (makeId, typeId, page, limit) => {
-    const {data} = await $host.post('api/carsharing/filter', {makeId: makeId, typeId: typeId, page: ((page - 1) * limit), limit: limit})
+export const fetchAllCarsPaginatedAndFiltered = async (makeId, typeId, page, limit, userId) => {
+    const {data} = await $host.post('api/carsharing/filter', {makeId: makeId, typeId: typeId, page: ((page - 1) * limit), limit: limit, userId: userId})
     return data
 }
 export const fetchSingleCar = async (id) => {
     const {data} = await $host.get('api/carsharing/' + id)
     return data
 }
+export const fetchUserCars = async (id) => {
+    const {data} = await $host.get('api/carsharing/user/' + id)
+    return data
+}
+export const fetchRentedUserCars = async (id) => {
+    const {data} = await $host.get('api/carsharing/rented/' + id)
+    return data
+}
+
+export const rentCar = async (userId, carId, startDate, endDate) => {
+    const {data} = await $host.post('api/rent', {userId, carId, startDate, endDate})
+    return data
+}
+
+export const updatePrice = async (carId, price) => {
+    await $host.post('api/carsharing/price/update/' + carId, price)
+}
+
 export const addCar = async (auto) => {
     await $authHost.post('api/carsharing/car/add', auto)
 }

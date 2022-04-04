@@ -2,9 +2,10 @@ import {BrowserRouter} from "react-router-dom";
 import ApplicationRouter from "./components/ApplicationRouter";
 import NavBar from "./components/NavBar";
 import {observer} from "mobx-react-lite";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {Context} from "./index";
 import {CookiesProvider} from "react-cookie";
+import {getWallet} from "./api/UserApi";
 
 const App = observer(() => {
     const {userStore} = useContext(Context)
@@ -14,6 +15,7 @@ const App = observer(() => {
         userStore.setUsername(localStorage.getItem('username'))
         userStore.setRole(localStorage.getItem('role'))
         userStore.setId(localStorage.getItem('id'))
+        getWallet(userStore.id).then(data => userStore.setWallet(data))
     }, [])
 
 

@@ -6,7 +6,17 @@ export default class UserStore{
         this._username = {}
         this._role = {}
         this._id = {}
+        this._details = null
+        this._wallet = {}
         makeAutoObservable(this)
+    }
+
+    setWallet(wallet){
+        this._wallet = wallet
+    }
+
+    setDetails(details){
+        this._details = details
     }
 
     setIsAuth(isAuth){
@@ -23,6 +33,14 @@ export default class UserStore{
 
     setId(idUser){
         this._id = idUser
+    }
+
+    get wallet(){
+        return this._wallet
+    }
+
+    get details(){
+        return this._details
     }
 
     get isAuth(){
