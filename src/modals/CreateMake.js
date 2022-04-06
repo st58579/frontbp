@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
+import {addMake} from "../api/CarsharingApi";
 
 const CreateMake = ({show, onHide}) => {
+    const [make, setMake] = useState('')
+
+    const onSubmit = () => {
+        addMake(make).then(onHide)
+    }
+
     return (
         <Modal
             centered
@@ -15,12 +22,12 @@ const CreateMake = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Control placeholder={"Add make name"}/>
+                    <Form.Control value={make} onChange={e => setMake(e.target.value)} placeholder={"Add make name"}/>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant={"outline-danger"} onClick={onHide}>Close</Button>
-                <Button variant={"outline-success"} onClick={onHide}>Add</Button>
+                <Button variant={"outline-success"} onClick={onSubmit}>Add</Button>
             </Modal.Footer>
         </Modal>
     );

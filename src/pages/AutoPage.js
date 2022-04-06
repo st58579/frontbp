@@ -31,14 +31,13 @@ const AutoPage = () => {
             <Card className="m-5" style={{borderRadius: 10}}>
                 <Row className="m-3">
                     <Row style={{fontSize: 26}}><b>Rent {selectedAuto.makeName} {selectedAuto.model}</b></Row>
-                    <Row style={{fontSize: 16, marginBottom: 7}}><b>2.5 / Бензин / Автомат</b> </Row>
                     <Col md={4}>
 
                         <Image fluid width={"400rem"} height={""}
                                src={selectedAuto.img ? selectedAuto.img : defaultPlaceholder}/>
                     </Col>
 
-                    <Col md={4}>
+                    <Col md={6}>
                         <Card
                             className="d-flex flex-column"
                             style={{fontSize: 22}}
@@ -74,7 +73,7 @@ const AutoPage = () => {
                                         <Col md={7}>
                                             Engine
                                         </Col>
-                                        <Col md={5}>2.5 l 200 h.p.</Col>
+                                        <Col md={5}>{selectedAuto.engine}</Col>
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
@@ -82,13 +81,13 @@ const AutoPage = () => {
                                         <Col md={7}>
                                             Transmission
                                         </Col>
-                                        <Col md={5}>Automatic</Col>
+                                        <Col md={5}>{selectedAuto.transmission}</Col>
                                     </Row>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card>
                     </Col>
-                    <Col md={4}>
+                    <Col md={2}>
                         <Row>
                             <Button variant={"outline-dark"} size={"lg"}
                                     onClick={() => setRentAutoVisible(true)}>Rent this car</Button>

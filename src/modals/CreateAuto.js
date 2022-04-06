@@ -13,8 +13,9 @@ const CreateAuto = observer(({show, onHide}) => {
     const [pricePerDay, setPricePerDay] = useState()
     const [selectedType, setSelectedType] = useState(null)
     const [selectedMake, setSelectedMake] = useState(null)
+    const [transmission, setTransmission] = useState()
+    const [engine, setEngine] = useState()
     const [image, setImage] = useState()
-
 
     const selectFile = e => {
         setImage(e.target.files[0])
@@ -28,12 +29,9 @@ const CreateAuto = observer(({show, onHide}) => {
         reader.onload = () => {
             const img = "data:image/jpeg;base64," + reader.result?.replace("data:", "")
                 .replace(/^.+,/, "");
-            // console.log(base64String)
-
-            const data = {model, year, seatsNumber, pricePerDay, idType, idMake, img, idUser}
-            console.log(data)
+            const data = {model, year, seatsNumber, pricePerDay, transmission, engine, idType, idMake, img, idUser}
             addCar(data).then(onHide).catch(error => {
-                console.log('Došlo k chybě při změně obrázku');
+                console.log(error.message());
             });
         };
         reader.readAsDataURL(image);
@@ -86,6 +84,10 @@ const CreateAuto = observer(({show, onHide}) => {
                     </Row>
                     <Form.Control value={model} onChange={e => setModel(e.target.value)} className="mt-3"
                                   placeholder="Model"/>
+                    <Form.Control value={transmission} onChange={e => setTransmission(e.target.value)} className="mt-3"
+                                  placeholder="Transmission"/>
+                    <Form.Control value={engine} onChange={e => setEngine(e.target.value)} className="mt-3"
+                                  placeholder="Engine"/>
                     <Form.Control value={year} onChange={e => setYear(Number(e.target.value))} className="mt-3"
                                   type="number" placeholder="Year"/>
                     <Form.Control value={seatsNumber} onChange={e => setSeatsNumber(Number(e.target.value))}

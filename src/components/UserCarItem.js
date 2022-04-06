@@ -18,17 +18,16 @@ const UserCarItem = ({car}) => {
     }
 
     return (
-        <Card className="m-5" style={{borderRadius: 10}}>
+        <Card className="m-5 mt-3" style={{borderRadius: 10}}>
             <Row className="m-3">
                 <Row style={{fontSize: 26}}><b>{car.makeName} {car.model}</b></Row>
-                <Row style={{fontSize: 16, marginBottom: 7}}><b>2.5 / Бензин / Автомат</b> </Row>
                 <Col md={4}>
 
                     <Image fluid width={"400rem"} height={""}
                            src={car.img ? car.img : defaultPlaceholder}/>
                 </Col>
 
-                <Col md={4}>
+                <Col md={6}>
                     <Card
                         className="d-flex flex-column"
                         style={{fontSize: 22}}
@@ -64,7 +63,7 @@ const UserCarItem = ({car}) => {
                                     <Col md={7}>
                                         Engine
                                     </Col>
-                                    <Col md={5}>2.5 l 200 h.p.</Col>
+                                    <Col md={5}>{car.engine}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -78,10 +77,10 @@ const UserCarItem = ({car}) => {
                         </ListGroup>
                     </Card>
                 </Col>
-                <Col md={4}>
+                <Col md={2}>
                     <Row>
                         <Button variant={"outline-dark"} size={"lg"}
-                                onClick={() => setEditCarVisible(true)}>Edit</Button>
+                                onClick={() => setEditCarVisible(true)}>Edit price</Button>
                         <Button className={"mt-3"} variant={"outline-dark"} size={"lg"}
                                 onClick={() => navigate(CARSHARING_ROUTE)}>Back to catalog</Button>
                     </Row>

@@ -21,7 +21,7 @@ const Carsharing = observer(() => {
     useEffect(() => {
         fetchMakes().then(data => autoStore.setMakes(data))
         fetchTypes().then(data => autoStore.setTypes(data))
-        fetchAllCarsPaginated().then(data => {
+        fetchAllCarsPaginated(userStore.id).then(data => {
             autoStore.setCars(data.cars)
             autoStore.setTotalCount(data.count)
         })
@@ -32,14 +32,13 @@ const Carsharing = observer(() => {
         fetchAllCarsPaginatedAndFiltered(autoStore.selectedMake.idMake, autoStore.selectedType.idType, autoStore.page, autoStore.limit, userStore.id)
             .then(data => {
                 autoStore.setCars(data.cars)
-                autoStore.setTotalCount(data.count)
+                if(autoStore.selectedType.idType > 0 || autoStore.selectedMake.idMake > 0) autoStore.setTotalCount(data.count)
             })
-
             .finally(() => setLoading(false))
     }, [autoStore.selectedMake, autoStore.selectedType, autoStore.page])
 
     if (loading) {
-        return <Spinner animation={"grow"}/>
+        return (<Spinner animation={"grow"}/>)
     }
 
     return (

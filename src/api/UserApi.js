@@ -15,6 +15,11 @@ export const login = async (username, password) => {
     localStorage.setItem('id', data.id)
     return data
 }
+export const fetchAllUsers = async () => {
+    const {data} = await $host.get('api/profile/all')
+    return data
+}
+
 export const fetchUserDetails = async(username) => {
     const {data} = await $authHost.get('api/profile/' + username)
     console.log(data)
@@ -34,8 +39,6 @@ export const getWallet = async(id) => {
     const {data} = await $authHost.get('api/profile/wallet/' + id)
     return data
 }
-
-
 
 export const check = async (token) => {
     const {data} = await $authHost.post('api/auth/check', 'Bearer ' + localStorage.getItem('token'))

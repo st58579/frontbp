@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {NavLink, useNavigate} from "react-router-dom";
 import {
@@ -11,10 +11,12 @@ import {
 } from "../utils/consts";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
+import CreateAuto from "../modals/CreateAuto";
 
 const NavBar = observer(() => {
     const {userStore} = useContext(Context)
     const navigate = useNavigate()
+    const [autoVisible, setAutoVisible] = useState(false)
 
     const logOut = () => {
         userStore.setIsAuth(false)
@@ -39,6 +41,7 @@ const NavBar = observer(() => {
                     <Nav className="ml-auto" style={{color: 'white'}}>
                         <Button variant={"dark"} className="ms-2">Balance: {userStore.wallet.balance}</Button>
                         <Button variant={"dark"} className="ms-2" onClick={() => navigate(USER_ROUTE + "/" + userStore.username)}>username: {userStore.username}</Button>
+                        <Button variant={"outline-success"} className="ms-2" onClick={() => setAutoVisible(true)}>Add car</Button>
                         <Button variant={"outline-light"} className="ms-2" onClick={() => navigate(USER_CARS_ROUTE)}>My cars</Button>
                         <Button variant={"outline-light"} className="ms-2" onClick={() => navigate(USER_RENTED_CARS_ROUTE)}>My rented cars</Button>
 
@@ -53,6 +56,7 @@ const NavBar = observer(() => {
                     </Nav>
                 }
             </Container>
+            <CreateAuto show={autoVisible} onHide={() => setAutoVisible(false)}/>
         </Navbar>
     );
 });

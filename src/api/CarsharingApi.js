@@ -1,30 +1,21 @@
 import {$host, $authHost} from "./Api"
-import jwtDecode from "jwt-decode";
 
-export const addMake = async (username, password) => {
-    const {data} = await $host.post('api/auth/registration', {username, password, role: 'user'})
-    return jwtDecode(data.token)
-}
 export const fetchMakes = async () => {
     const {data} = await $host.get('api/carsharing/makes')
     return data
-}
-
-export const addType = async (username, password) => {
-    const {data} = await $host.post('api/auth/registration', {username, password, role: 'user'})
-    return jwtDecode(data.token)
 }
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/carsharing/types')
     return data
 }
-
-export const fetchAllCars = async () => {
-    const {data} = await $host.get('api/carsharing/all')
-    return data
+export const addType = async (type) => {
+    await $host.post('api/carsharing/type/add', {type})
 }
-export const fetchAllCarsPaginated = async () => {
-    const {data} = await $host.get('api/carsharing')
+export const addMake = async (make) => {
+    await $host.post('api/carsharing/make/add', {make})
+}
+export const fetchAllCarsPaginated = async (id) => {
+    const {data} = await $host.get('api/carsharing/all/' + id)
     return data
 }
 export const fetchAllCarsPaginatedAndFiltered = async (makeId, typeId, page, limit, userId) => {
