@@ -101,8 +101,6 @@ const AddUserDetails = observer(({show, onHide}) => {
         }
     }
 
-
-
     return (
         <Modal
             centered

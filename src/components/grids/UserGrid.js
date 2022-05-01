@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {fetchAllUsers} from "../api/UserApi";
+import {fetchAllUsers} from "../../api/UserApi";
 import {Button, Spinner} from "react-bootstrap";
-import {Context} from "../index";
-import {makeAdmin, removeAdmin} from "../api/AdminApi";
+import {Context} from "../../index";
+import {makeAdmin, removeAdmin} from "../../api/AdminApi";
 
 const UserGrid = () => {
     const [loading, setLoading] = useState(true)

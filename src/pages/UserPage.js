@@ -8,6 +8,8 @@ import {fetchUserDetails} from "../api/UserApi";
 import {useNavigate} from "react-router-dom";
 import UpdateUserDetails from "../modals/UpdateUserDetails";
 import AddUserDatails from "../modals/AddUserDatails";
+import UserTransactionsGrid from "../components/grids/UserTransactionsGrid";
+import UserRentHistoryGrid from "../components/grids/UserRentHistoryGrid";
 
 const UserPage = observer(() => {
     const [loading, setLoading] = useState(true)
@@ -51,43 +53,43 @@ const UserPage = observer(() => {
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col md={7}>
+                                        <Col md={5}>
                                             Name:
                                         </Col>
-                                        <Col md={5}>{userStore.details?.name} {userStore.details?.surname}</Col>
+                                        <Col md={7}>{userStore.details?.name} {userStore.details?.surname}</Col>
                                     </Row>
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col md={7}>
+                                        <Col md={5}>
                                             Email:
                                         </Col>
-                                        <Col md={5}>{userStore.details?.email}</Col>
+                                        <Col md={7}>{userStore.details?.email}</Col>
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col md={7}>
+                                        <Col md={5}>
                                             Address:
                                         </Col>
-                                        <Col md={5}>{userStore.details?.city}</Col>
+                                        <Col md={7}>{userStore.details?.city}</Col>
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col md={7}>
+                                        <Col md={5}>
                                             Phone:
                                         </Col>
-                                        <Col md={5}>{userStore.details?.phoneNumber}</Col>
+                                        <Col md={7}>{userStore.details?.phoneNumber}</Col>
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col md={7}>
-                                            DN:
+                                        <Col md={5}>
+                                            Document number :
                                         </Col>
-                                        <Col md={5}>{userStore.details?.documentNumber}</Col>
+                                        <Col md={7}>{userStore.details?.documentNumber}</Col>
                                     </Row>
                                 </ListGroup.Item>
                             </ListGroup>
@@ -110,22 +112,7 @@ const UserPage = observer(() => {
                 </Row>
             </Card>
 
-            <Card className="m-5" style={{borderRadius: 10}}>
-                <Row>
-                    <Col md={4}>
-
-                    </Col>
-                    <Col md={4}>
-
-                    </Col>
-                    <Col md={4}>
-                        <div className="m-5">
-                            {/*<Image fluid width={"400rem"} height={""}*/}
-                            {/*       src={selectedAuto.img ? selectedAuto.img : defaultPlaceholder}/>*/}
-                        </div>
-                    </Col>
-                </Row>
-            </Card>
+            <UserRentHistoryGrid />
 
             <UpdateUserDetails show={updateUserVisible} onHide={() => setUpdateUserVisible(false)}/>
             <AddUserDatails show={addUserDetailsVisible} onHide={() => {

@@ -8,10 +8,10 @@ import {
     USER_CARS_ROUTE,
     USER_RENTED_CARS_ROUTE,
     USER_ROUTE
-} from "../utils/consts";
-import {Context} from "../index";
+} from "../../utils/consts";
+import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import CreateAuto from "../modals/CreateAuto";
+import CreateAuto from "../../modals/CreateAuto";
 
 const NavBar = observer(() => {
     const {userStore} = useContext(Context)
@@ -36,7 +36,7 @@ const NavBar = observer(() => {
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <NavLink style={{color: 'white'}} to={CARSHARING_ROUTE}>Carsharing</NavLink>
+                <Button variant={"dark"} className="ms-2" onClick={() => navigate(CARSHARING_ROUTE)}>Carsharing</Button>
                 {userStore.isAuth ?
                     <Nav className="ml-auto" style={{color: 'white'}}>
                         <Button variant={"dark"} className="ms-2">Balance: {userStore.wallet.balance}</Button>

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row, Spinner} from "react-bootstrap";
-import TypeBar from "../components/TypeBar";
-import MakeBar from "../components/MakeBar";
+import TypeBar from "../components/bars/TypeBar";
+import MakeBar from "../components/bars/MakeBar";
 import CarList from "../components/CarList";
 import {Context} from "../index";
 import {
@@ -13,7 +13,7 @@ import {
 import {observer} from "mobx-react-lite";
 import Pages from "../components/Pages";
 
-const Carsharing = observer(() => {
+const CarsharingPage = observer(() => {
     const {autoStore} = useContext(Context)
     const {userStore} = useContext(Context)
     const [loading, setLoading] = useState(true)
@@ -57,4 +57,4 @@ const Carsharing = observer(() => {
     );
 });
 
-export default Carsharing;
+export default CarsharingPage;

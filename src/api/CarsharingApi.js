@@ -39,6 +39,13 @@ export const rentCar = async (userId, carId, startDate, endDate) => {
     const {data} = await $host.post('api/rent', {userId, carId, startDate, endDate})
     return data
 }
+export const returnCar = async (carId) => {
+    await $host.post('api/rent/return/' + carId)
+}
+export const changeCarStatus = async (availability, carId) => {
+    const {data} = await $host.post('api/carsharing/car/update/availability', {availability, carId})
+    return data
+}
 
 export const updatePrice = async (carId, price) => {
     await $host.post('api/carsharing/price/update/' + carId, price)

@@ -9,15 +9,16 @@ const CarListItem = ({car}) => {
 
     return (
         <Col md={3} onClick={() => navigate(AUTO_ROUTE + '/' + car.idCar)}>
-            <Card style={{width: 200, height: 400, cursor: "pointer", marginTop: "10px", alignItems: "center"}} border={"info"}>
-                <Image width={200} height={200} src={car.img ? car.img : defaultPlaceholder}/>
+            <Card style={{width: 200, height: 300, cursor: "pointer", marginTop: "10px", alignItems: "center"}} border={"info"}>
+                <Image width={198} height={150} src={car.img ? car.img : defaultPlaceholder}/>
                 <Card.Body style={{width: 200}}>
                     <Card.Title >{car.makeName} {car.model}</Card.Title>
-                    <Card.Subtitle>Price/day: {car.pricePerDay}</Card.Subtitle>
+                    <Card.Subtitle>Price: {car.pricePerDay}$/day</Card.Subtitle>
                     <ListGroup variant="">
-                        <div>Car ID: {car.idCar}</div>
-                        <div>Make: {car.makeName}</div>
                         <div>Type: {car.type}</div>
+                        <div>Engine: {car.engine}</div>
+                        <div>Year: {car.year}</div>
+
                     </ListGroup>
                 </Card.Body>
 

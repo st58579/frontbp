@@ -23,7 +23,7 @@ const RentAuto = observer(({show, onHide}) => {
                 onHide()
             })
             .catch(e => {
-                setError(e.message)
+                setError(e.response.data.message)
                 setShowError(true)
             })
     }
@@ -56,8 +56,9 @@ const RentAuto = observer(({show, onHide}) => {
                         onChange={(date) => setEndDate(date)}
                         renderInput={(params) => <TextField className="mt-3" {...params} />}
                     />
-                    <h4 style={{marginTop: 10}}>Total price for {(endDate.getTime() - startDate.getTime()) /
-                        (1000 * 3600 * 24)} days: {(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) * selectedAuto.pricePerDay}$</h4>
+                    <h4 style={{marginTop: 10}}>Total price for {Math.round((endDate.getTime() - startDate.getTime()) /
+                        (1000 * 3600 * 24))} day(s): {Math.round((endDate.getTime() - startDate.getTime()) /
+                        (1000 * 3600 * 24)) * selectedAuto.pricePerDay}$</h4>
 
                     <Alert className={"mt-3"} variant="danger" show={showError} onClose={() => setShowError(false)} dismissible>
                         <Alert.Heading>Rent error!</Alert.Heading>

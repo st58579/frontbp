@@ -3,7 +3,7 @@ import {Button, Card, Col, Form, Image, ListGroup, Modal, Row} from "react-boots
 import defaultPlaceholder from "../400x300.png";
 import {CARSHARING_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router-dom";
-import {updatePrice} from "../api/CarsharingApi";
+import {changeCarStatus, updatePrice} from "../api/CarsharingApi";
 
 const UserCarItem = ({car}) => {
     const navigate = useNavigate()
@@ -15,6 +15,14 @@ const UserCarItem = ({car}) => {
             car.pricePerDay = price
             setEditCarVisible(false)
         })
+    }
+
+    const setAvailable = () => {
+        changeCarStatus(1, car.idCar).then(() => window.location.reload())
+    }
+
+    const setUnavailable = () => {
+        changeCarStatus(0, car.idCar).then(() => window.location.reload())
     }
 
     return (
@@ -83,7 +91,15 @@ const UserCarItem = ({car}) => {
                                 onClick={() => setEditCarVisible(true)}>Edit price</Button>
                         <Button className={"mt-3"} variant={"outline-dark"} size={"lg"}
                                 onClick={() => navigate(CARSHARING_ROUTE)}>Back to catalog</Button>
-                    </Row>
+                        {car.available === 0
+                        ?
+                            <Button className={"mt-3"} variant={"outline-success"} size={"lg"}
+                                    onClick={() => setAvailable()}>Set available</Button>
+                            :
+                            <Button className={"mt-3"} variant={"outline-danger"} size={"lg"}
+                                    onClick={() => setUnavailable()}>Set unavailable</Button>
+                        }
+                        </Row>
                 </Col>
             </Row>
 

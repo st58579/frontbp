@@ -1,6 +1,6 @@
 import {BrowserRouter} from "react-router-dom";
 import ApplicationRouter from "./components/ApplicationRouter";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/bars/NavBar";
 import {observer} from "mobx-react-lite";
 import {useContext, useEffect} from "react";
 import {Context} from "./index";

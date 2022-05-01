@@ -6,7 +6,7 @@ import {Context} from "../index";
 import {getWallet, login, registration} from "../api/UserApi";
 import {observer} from "mobx-react-lite";
 
-const Auth = observer(() => {
+const AuthPage = observer(() => {
     const {userStore} = useContext(Context)
     const navigate = useNavigate()
     const location = useLocation()
@@ -56,7 +56,11 @@ const Auth = observer(() => {
             userStore.setUsername(userDto.username)
             userStore.setIsAuth(true)
             userStore.setRole(userDto.role)
-            navigate(CARSHARING_ROUTE)
+            if (isLogin) {
+                navigate(CARSHARING_ROUTE)
+            } else {
+                alert('Registered successfully!')
+            }
         } catch (e) {
             setError(e.response.data.message)
             setShowError(true)
@@ -155,4 +159,4 @@ const Auth = observer(() => {
     );
 });
 
-export default Auth;
+export default AuthPage;

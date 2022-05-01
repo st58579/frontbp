@@ -19,7 +19,7 @@ const ApplicationRouter = observer(() => {
             {userStore.isAuth && userStore.role === 'admin' && adminRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} element={<Component/>}/>
             )}
-            {/*<Route path="*" element={<Auth />}/>*/}
+            {/*<Route path="*" element={<AuthPage />}/>*/}
         </Routes>
     );
 });

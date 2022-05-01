@@ -3,7 +3,7 @@ import {Button, Card, Col, Container, Image, ListGroup, Row, Spinner} from "reac
 import {useNavigate, useParams} from "react-router-dom";
 import {fetchSingleCar} from "../api/CarsharingApi";
 import defaultPlaceholder from '../400x300.png'
-import {CARSHARING_ROUTE} from "../utils/consts";
+import {CARSHARING_ROUTE, USER_RENTED_CARS_ROUTE} from "../utils/consts";
 import RentAuto from "../modals/RentAuto";
 import {Context} from "../index";
 
@@ -115,7 +115,10 @@ const AutoPage = () => {
                 </Row>
             </Card>
 
-            <RentAuto show={rentAutoVisible} onHide={() => setRentAutoVisible(false)} />
+            <RentAuto show={rentAutoVisible} onHide={() => {
+                setRentAutoVisible(false)
+                navigate(USER_RENTED_CARS_ROUTE)
+            }} />
 
         </Container>
     );

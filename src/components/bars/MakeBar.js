@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Card, ListGroup, Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
-import {Context} from "../index";
+import {Context} from "../../index";
 
 const MakeBar = observer(() => {
     const {autoStore} = useContext(Context)
